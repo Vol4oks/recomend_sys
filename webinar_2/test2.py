@@ -133,12 +133,13 @@ model.fit(csr_matrix(user_item_matrix).T.tocsr(),  # На вход item-user mat
 
 print('start')
 try:
-    recs = model.recommend(userid=userid_to_id[2],  # userid - id от 0 до N
-                            user_items=csr_matrix(user_item_matrix).tocsr(),   # на вход user-item matrix
-                            N=5, # кол-во рекомендаций 
+    xs = csr_matrix(user_item_matrix).tocsr()
+    recs = model.recommend(userid=userid_to_id[1], 
+                            user_items=xs,   # на вход user-item matrix
+                            N=5, 
                             filter_already_liked_items=False, 
                             filter_items=None, 
-                            recalculate_user=True)
+                            recalculate_user=False)
 except Exception as e:
     print(f'ERROR: {e}')
 print('________')
